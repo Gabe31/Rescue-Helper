@@ -12,7 +12,7 @@ class Rescue
         rescue_list = parsed_page.css ('div.title')
 
         rescue_list.each do |animals|
-        rescues = { name: rescue_list.css('div.title').text.strip }
+        rescues = { name: animals.css('div.title').text.strip }
 
         @@all << rescues 
     

@@ -4,11 +4,8 @@ class Cli
         puts design 
         puts "Welcome to Rescue Helper!"
         puts "Find an animal to donate to!"
-
         Rescue.new.scraper
-
         rescue_list 
-
     end 
 
     def design 
@@ -27,10 +24,11 @@ class Cli
 
         if user_input == "y" || "yes" 
             Rescue.list
-        elsif user_input == "n" || "no"
+        elsif user_input == "n" || "no" || "exit"
             puts exit 
         else 
             puts "Please enter a valid response"
+            rescue_list
         end 
     end 
 
