@@ -1,7 +1,7 @@
 require 'pry'
 require 'HTTParty'
 require 'nokogiri'
+require 'open-uri'
 
-require_relative './lib/scraper'
-require_relative './lib/cli'
-require_relative'./lib/rescue'
+require_relative './scraper'
+require_relative './cli'

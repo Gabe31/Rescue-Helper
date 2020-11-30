@@ -2,4 +2,4 @@
 
 require_relative '../lib/environment'
 
-cli.new.run 
+Cli.new.run 
