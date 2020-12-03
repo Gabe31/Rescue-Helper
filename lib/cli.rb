@@ -23,7 +23,7 @@ class Cli
         user_input = gets.strip.downcase
 
         if user_input == "y" || "yes" 
-            Rescue.list
+            puts list_animals
         elsif user_input == "n" || "no" || "exit"
             puts exit 
         else 
@@ -32,6 +32,14 @@ class Cli
         end 
     end 
 
+    def list_animals
+        puts "Meet Our Animals"
+        @rescue = Rescue.scraper
+        @rescue.each_with_index do |ani, idx|
+          puts "#{idx + 1}. #{ani.name}"
+        end
+        puts ""
+    end
 
 
     def exit
