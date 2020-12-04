@@ -7,7 +7,7 @@ class Cli
         puts "Welcome to Rescue Helper!"
         puts "Find an animal to donate to!"
         Scraper.new.scraper
-        menu 
+        intro
     end 
 
     def design 
@@ -17,22 +17,19 @@ class Cli
     end 
 
 
-    def menu
-       
-        user_input = nil 
-            puts "Would you like to see our list of rescues?"
-            puts "Y/N"
+    def intro
 
+        puts "Ready to meet our rescues? Press y or yes!"
+
+        #user_input = nil 
         user_input = gets.strip.downcase
 
-        if user_input == "y" || "yes" 
-            puts list_animals
+        if user_input == "y" || "yes"
+            list_animals
             more_info
-        elsif user_input == "n" || "no" || "exit"
-            menu 
+            re_list 
         else 
-            puts "Please enter a valid response"
-            exit 
+            return nil
         end 
     end 
 
@@ -41,7 +38,6 @@ class Cli
         puts "Meet Our Animals"
 
       
-#put method for list
       Rescue.find_all.each.with_index(1) do |ani, idx|
        puts "#{idx}. #{ani}"
     end
@@ -49,7 +45,7 @@ class Cli
     end
 
     def more_info
-        puts "Which animal would you like more information on?"
+        puts "Which animal would you like more information on? Type their name!"
         u_i = gets.strip
         animal = Rescue.find_rescue(u_i)
         if !animal
@@ -59,8 +55,19 @@ class Cli
         Scraper.scraper_info(animal)
     end 
 
-    def exit
-        puts "Goodbye! Visit again soon!"
+    def re_list
+        puts "Would you like to make another selection?"
+        if "y" || "yes"
+            Rescue.find_all.each.with_index(1) do |ani, idx|
+                puts "#{idx}. #{ani}"
+            more_info
+        else 
+            return nil
+        end 
     end 
 
 end 
+
+#create a method/flow that allowss a user to look at anothere pet after initial selection
+
+#if yes, print list if no exit 
