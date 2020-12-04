@@ -1,11 +1,13 @@
 class Cli
 
+    #binding.pry 
+
     def run 
         puts design 
         puts "Welcome to Rescue Helper!"
         puts "Find an animal to donate to!"
-        Rescue.new.scraper
-        rescue_list 
+        Scraper.new.scraper
+        menu 
     end 
 
     def design 
@@ -15,7 +17,8 @@ class Cli
     end 
 
 
-    def rescue_list
+    def menu
+       
         user_input = nil 
             puts "Would you like to see our list of rescues?"
             puts "Y/N"
@@ -24,23 +27,37 @@ class Cli
 
         if user_input == "y" || "yes" 
             puts list_animals
+            more_info
         elsif user_input == "n" || "no" || "exit"
-            puts exit 
+            menu 
         else 
             puts "Please enter a valid response"
-            rescue_list
+            exit 
         end 
     end 
 
+
     def list_animals
         puts "Meet Our Animals"
-        @rescue = Rescue.scraper
-        @rescue.each_with_index do |ani, idx|
-          puts "#{idx + 1}. #{ani.name}"
-        end
+
+      
+#put method for list
+      Rescue.find_all.each.with_index(1) do |ani, idx|
+       puts "#{idx}. #{ani}"
+    end
         puts ""
     end
 
+    def more_info
+        puts "Which animal would you like more information on?"
+        u_i = gets.strip
+        animal = Rescue.find_rescue(u_i)
+        if !animal
+            puts "Not a valid response"
+            more_info
+        end 
+        Scraper.scraper_info(animal)
+    end 
 
     def exit
         puts "Goodbye! Visit again soon!"

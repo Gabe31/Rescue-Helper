@@ -5,3 +5,4 @@ require 'open-uri'
 
 require_relative './scraper'
 require_relative './cli'
+require_relative './rescue'

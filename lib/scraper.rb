@@ -1,15 +1,4 @@
-class Rescue 
-
-    attr_accessor :name
-
-    def initialize(name)
-        @name = name
-        self.save
-    end 
-
-    def self.all
-        @@all
-    end 
+class Scraper
 
     @@all = []
 
@@ -20,13 +9,21 @@ class Rescue
         url = "http://woodstocksanctuary.org/meet-the-animals/"
        
         parsed_page = Nokogiri::HTML(open(url))
-        rescue_list = parsed_page.css ('div.title')
+        rescue_list = parsed_page.css('div.title')
     
         rescue_list.each do |animals|
-        rescues = { name: animals.css('div.title').children.text.strip }
-
-        @@all << rescues 
+            name = animals.children.text
+            info = animals.parent.parent.attr('href')
+        
+        Rescue.new(name, info)
     
         end 
     end 
+
+    def self.scraper_info(info)
+       
+        doc = Nokogiri::HTML(open(info.url))
+        blurb = doc.css("p")[4].text
+        puts blurb 
+      end 
 end 
