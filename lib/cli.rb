@@ -27,9 +27,8 @@ class Cli
         if user_input == "y" || "yes"
             list_animals
             more_info
-            re_list 
         else 
-            return nil
+            return "puts goodbye"
         end 
     end 
 
@@ -53,16 +52,20 @@ class Cli
             more_info
         end 
         Scraper.scraper_info(animal)
+        re_list
     end 
 
     def re_list
+
         puts "Would you like to make another selection?"
-        if "y" || "yes"
-            Rescue.find_all.each.with_index(1) do |ani, idx|
-                puts "#{idx}. #{ani}"
+        
+        user_input = gets.strip.downcase
+        
+        if user_input = "y" || "yes"
+            list_animals 
             more_info
         else 
-            return nil
+            puts "goodbye"
         end 
     end 
 
